@@ -1,5 +1,4 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { createInstance, instances } from "../app/create-wa-instance";
 import { sendTextMessage } from "../app/send-message-text";
 
 export const messageController = {
@@ -17,7 +16,7 @@ export const messageController = {
     }
 
     try {
-      const { success, message: errMessage, data } = await sendTextMessage(
+      const { success, message: errMessage } = await sendTextMessage(
         sessionId,
         phoneNumber,
         message
@@ -32,8 +31,7 @@ export const messageController = {
 
       return reply.code(200).send({
         success: true,
-        message: "Text message sent successfully.",
-        data,
+        message: "Text message sent successfully."
       });
     } catch (err) {
       console.error("Error sending text message:", err);
