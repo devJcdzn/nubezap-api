@@ -1,4 +1,4 @@
-import { instances } from "./create-wa-instance";
+import { getOrCreateInstance } from "../lib/utils";
 
 export async function sendTextMessage(
   sessionId: string,
@@ -6,22 +6,18 @@ export async function sendTextMessage(
   message: string
 ) {
   if (!sessionId || !phoneNumber || !message) {
-    throw new Error("Fields missing");
-  }
-
-  const sock = instances[sessionId];
-
-  if (!sock) {
-    throw new Error("Session not found");
+    throw new Error("Campos obrigatórios faltando");
   }
 
   try {
+    const sock = await getOrCreateInstance(sessionId);
+
     const jid = `${phoneNumber}@s.whatsapp.net`;
     await sock.sendMessage(jid, { text: message });
 
-    return { success: true, message: "Message Sent" };
+    return { success: true, message: "Mensagem enviada com sucesso." };
   } catch (err) {
     console.error(`Error sending message to ${phoneNumber}:`, err);
-    return { success: false, message: "Error sending message" };
+    return { success: false, message: "Erro ao enviar mensagem" };
   }
 }

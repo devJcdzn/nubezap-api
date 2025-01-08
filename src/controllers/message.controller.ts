@@ -17,7 +17,7 @@ export const messageController = {
     }
 
     try {
-      const { success, message: errMessage } = await sendTextMessage(
+      const { success, message: errMessage, data } = await sendTextMessage(
         sessionId,
         phoneNumber,
         message
@@ -33,6 +33,7 @@ export const messageController = {
       return reply.code(200).send({
         success: true,
         message: "Text message sent successfully.",
+        data,
       });
     } catch (err) {
       console.error("Error sending text message:", err);

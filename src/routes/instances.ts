@@ -15,6 +15,17 @@ export async function instancesRoutes(app: FastifyTypedInstance) {
     },
     async (req, res) => instanceController.createInstance(req, res)
   );
+  app.get(
+    "/qr",
+    {
+      schema: {
+        tags: ["Instâncias", "QRCodes"],
+        description: "Busca o qrCode da instância gerada.",
+        queryString: createInstanceRequestQuerySchema,
+      },
+    },
+    async (req, res) => instanceController.getInstanceQrCode(req, res)
+  );
   app.delete(
     "/",
     {
@@ -24,6 +35,6 @@ export async function instancesRoutes(app: FastifyTypedInstance) {
         queryString: createInstanceRequestQuerySchema,
       },
     },
-    async (req, res) => instanceController.deleteInstance
+    async (req, res) => instanceController.deleteInstance(req, res)
   );
 }

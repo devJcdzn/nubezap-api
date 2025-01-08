@@ -16,7 +16,10 @@ import { fastifySwaggerUi } from "@fastify/swagger-ui";
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 mongoose
-  .connect("mongodb://mongo:3919d3aee2224eacf7db@cloud.confiaagenda.com.br:27017/?tls=false")
+  .connect(
+    process.env.MONGO_DB_URL ||
+      "mongodb://mongo:3919d3aee2224eacf7db@cloud.confiaagenda.com.br:27017/?tls=false"
+  )
   .then(() => app.log.info("Connected to MongoDB"))
   .catch((err) => app.log.error(err));
 

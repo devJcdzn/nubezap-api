@@ -64,7 +64,12 @@ export async function useMongoAuthState(sessionId: string) {
   const readData = async (key: string) => {
     const entry = await Session.findOne({ sessionId, key });
     if (entry) {
-      return JSON.parse(entry.data, BufferJSON.reviver);
+      try {
+        return JSON.parse(entry.data, BufferJSON.reviver);
+      } catch (err) {
+        console.error(`Erro ao ler os dados para a chave ${key}:`, err);
+        return null;
+      }
     }
     return null;
   };

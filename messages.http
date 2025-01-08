@@ -1,8 +1,8 @@
 ### Send text message
-POST http://localhost:3333/message/text?sessionId=SESSION_ID_HERE
+POST http://localhost:3333/message/text?sessionId=1
 Content-Type: application/json
 
 {
-  "phoneNumber": "5527999999999",
+  "phoneNumber": "552792525560",
   "message": "Hello World!"
 }

@@ -1,5 +1,5 @@
 ### Create Instance
-POST http://localhost:3333/instances?sessionId=OPTIONAL_SESSION_ID_HERE
+POST http://localhost:3333/instances?sessionId=1
 
 ### Dele Instance
-DELETE http://localhost:3333/instances?sessionId=SESSION_ID_HERE
+DELETE http://localhost:3333/instances?sessionId=13
